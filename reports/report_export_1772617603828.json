@@ -1,0 +1,51 @@
+{
+    "metadata": {
+        "timestamp": "2026-03-04T09:46:43.829Z",
+        "parameters": {
+            "emailToSearch": "admin@empresa.com",
+            "minSpent": 1500,
+            "dateRange": {
+                "startDate": "2020-01-01T00:00:00.000Z",
+                "endDate": "2026-03-04T09:46:43.783Z"
+            }
+        }
+    },
+    "results": {
+        "userPurchases": [],
+        "productReservationSummary": [
+            {
+                "product_name": "Practical Metal Hat (ES)",
+                "total_units": "3",
+                "total_reservations": "1",
+                "first_date": "2026-02-27T07:28:54.478Z",
+                "last_date": "2026-02-27T07:28:54.478Z"
+            },
+            {
+                "product_name": "Electronic Aluminum Fish (ES)",
+                "total_units": "2",
+                "total_reservations": "1",
+                "first_date": "2026-02-26T18:23:05.638Z",
+                "last_date": "2026-02-26T18:23:05.638Z"
+            },
+            {
+                "product_name": "Recycled Aluminum Chair (ES)",
+                "total_units": "1",
+                "total_reservations": "1",
+                "first_date": "2026-02-27T01:53:22.605Z",
+                "last_date": "2026-02-27T01:53:22.605Z"
+            }
+        ],
+        "highSpendingUsers": [
+            {
+                "email": "tracey_cremin@yahoo.com",
+                "role": "USER",
+                "total_spent": "3202.900000000000100000000000000000"
+            },
+            {
+                "email": "martha56@hotmail.com",
+                "role": "USER",
+                "total_spent": "1634.400000000000000000000000000000"
+            }
+        ]
+    }
+}
