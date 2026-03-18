@@ -1,0 +1,1 @@
+[{"email":"import1@test.com","password":"password123","role":"USER"},{"email":"import2@test.com","password":"password123","role":"ADMIN"},{"email":"invalid-email","password":"123","role":"USER"}]
