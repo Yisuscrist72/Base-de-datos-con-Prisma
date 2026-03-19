@@ -15,27 +15,49 @@ Herramienta avanzada de gestión e intercambio de datos empresariales que permit
 Antes de comenzar, asegúrate de tener instalado lo siguiente:
 
 1.  [Node.js](https://nodejs.org/) (versión 20+)
-2.  [Docker Desktop](https://www.docker.com/products/docker-desktop/) (El contenedor con PostgreSQL debe estar en ejecución)
+2.  [Docker Desktop](https://www.docker.com/products/docker-desktop/)
 
-## ⚙️ Instalación
+## ⚙️ Configuración Inicial
 
-1.  Clona el repositorio o descarga el código fuente.
-2.  Instala las dependencias necesarias:
+1.  **Instalar dependencias**:
     ```bash
     npm install
     ```
-3.  Asegúrate de que tus contenedores de Docker estén activos para que la base de datos sea accesible.
+
+2.  **Configurar Variables de Entorno**:
+    Crea un archivo `.env` en la raíz del proyecto (si no existe) con el siguiente contenido:
+    ```env
+    DATABASE_URL="postgresql://admin:admin123@localhost:54322/empresa_db?schema=public"
+    ```
+    *Nota: Utilizamos el puerto **54322** para evitar conflictos comunes con puertos reservados en Windows.*
+
+3.  **Levantar la Base de Datos**:
+    ```bash
+    docker-compose up -d
+    ```
+
+4.  **Preparar la Base de Datos**:
+    Sincroniza el esquema y genera el cliente de Prisma:
+    ```bash
+    npx prisma db push
+    npm run seed
+    ```
 
 ## 🚀 Cómo empezar
 
-Para lanzar la herramienta visual (Dashboard) y habilitar la API, ejecuta:
-
+### 1. Iniciar el Dashboard
+Para lanzar la herramienta visual y habilitar la API, ejecuta:
 ```bash
 npm run dashboard
 ```
+Abre tu navegador en: 👉 **[http://localhost:3000](http://localhost:3000)**
 
-Una vez ejecutado, abre tu navegador en:
-👉 **[http://localhost:3000](http://localhost:3000)**
+### 2. Explorar Datos (Prisma Studio)
+Si deseas ver o editar los datos de la base de datos de forma visual:
+```bash
+npx prisma studio
+```
+Se abrirá en: 👉 **[http://localhost:5555](http://localhost:5555)** (o el puerto que indique la consola).
 
 ## 📂 Estructura del Proyecto
 
