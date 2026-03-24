@@ -40,6 +40,7 @@ Antes de comenzar, asegúrate de tener instalado lo siguiente:
     Sincroniza el esquema y genera el cliente de Prisma:
     ```bash
     npx prisma db push
+    npx prisma generate
     npm run seed
     ```
 
