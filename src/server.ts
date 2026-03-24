@@ -24,7 +24,7 @@ app.post("/api/import/:model", upload.single("file"), async (req, res) => {
     if (model !== "user" && model !== "product") return res.status(400).json({ error: "Modelo inválido." });
 
     try {
-        const report = await exchangeService.importData(file.path, model as any);
+        const report = await exchangeService.importData(file.path, model as any, file.originalname);
         await fs.remove(file.path); // Limpiar archivo temporal
         res.json(report);
     } catch (error: any) {

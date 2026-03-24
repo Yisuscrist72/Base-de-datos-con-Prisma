@@ -28,8 +28,8 @@ export class DataExchangeService {
     /**
      * Importa datos desde CSV, JSON o XML
      */
-    async importData(filePath: string, model: "user" | "product"): Promise<Report> {
-        const ext = path.extname(filePath).toLowerCase();
+    async importData(filePath: string, model: "user" | "product", originalName?: string): Promise<Report> {
+        const ext = (originalName ? path.extname(originalName) : path.extname(filePath)).toLowerCase();
         const report: Report = {
             processType: `IMPORT_${model.toUpperCase()}_${ext.toUpperCase().replace('.', '')}`,
             timestamp: new Date(),
