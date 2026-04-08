@@ -110,5 +110,56 @@ function showResult(report) {
 document.getElementById('close-modal').onclick = () => modal.style.display = 'none';
 document.getElementById('btn-close').onclick = () => modal.style.display = 'none';
 
+// --- FUNCIONALIDADES AED (NATIVO) ---
+
+document.getElementById('btn-aed-users').addEventListener('click', async () => {
+    const role = document.getElementById('aedRoleSelect').value;
+    try {
+        const res = await fetch(`/api/native/users/${role}`);
+        const data = await res.json();
+        showNativeResult(`Usuarios con Rol: ${role}`, data.rows, ['email', 'role', 'createdAt']);
+    } catch (e) { alert('Error cargando informe nativo'); }
+});
+
+document.getElementById('btn-aed-ranking').addEventListener('click', async () => {
+    try {
+        const res = await fetch('/api/native/ranking');
+        const data = await res.json();
+        showNativeResult('Ranking de Facturación Optimizado (JOIN)', data, ['email', 'total_spent', 'orders_count']);
+    } catch (e) { alert('Error cargando ranking'); }
+});
+
+document.getElementById('btn-aed-products').addEventListener('click', async () => {
+    try {
+        const res = await fetch('/api/native/products');
+        const data = await res.json();
+        showNativeResult('Informe de Precios (Inner Join)', data, ['producto', 'intervalo', 'precio']);
+    } catch (e) { alert('Error cargando productos'); }
+});
+
+function showNativeResult(title, rows, fields) {
+    modal.style.display = 'flex';
+    let tableHtml = `
+        <h4 style="color:var(--secondary); margin-bottom:15px;">${title}</h4>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>${fields.map(f => `<th>${f}</th>`).join('')}</tr>
+                </thead>
+                <tbody>
+                    ${rows.map(row => `
+                        <tr>${fields.map(f => `<td>${row[f] || 'N/A'}</td>`).join('')}</tr>
+                    `).join('')}
+                </tbody>
+            </table>
+        </div>
+        <p style="font-size: 0.8rem; margin-top:15px; color:#94a3b8;">
+            <i class="fas fa-info-circle"></i> Esta consulta se ha ejecutado directamente en PostgreSQL 
+            usando <b>PreparedStatements</b> y <b>ResulSets</b> nativos (pg-driver).
+        </p>
+    `;
+    modalBody.innerHTML = tableHtml;
+}
+
 // Inicialización
 window.onload = loadReports;

@@ -71,8 +71,38 @@
                             </select>
                         </div>
                     </div>
-                    <button class="btn btn-secondary" id="btn-export">
+                <button class="btn btn-secondary" id="btn-export">
                         <i class="fas fa-download"></i> Descargar Exportable
+                    </button>
+                </div>
+            </section>
+
+            <!-- Nueva Sección: AED Rendimiento (Bajo Nivel) -->
+            <section class="card native-card native-centered">
+                <div class="card-header">
+                    <i class="fas fa-database"></i>
+                    <h2>Consultas Rendimiento (AED)</h2>
+                </div>
+                <div class="card-body">
+                    <p>Acceso directo a PostgreSQL mediante <b>PreparedStatements</b> y <b>JOINs</b> optimizados.</p>
+                    <div class="input-group">
+                        <label>Filtrar Usuarios por Rol:</label>
+                        <select id="aedRoleSelect">
+                            <option value="USER">Usuarios (USER)</option>
+                            <option value="ADMIN">Administradores (ADMIN)</option>
+                            <option value="MANAGER">Gestores (MANAGER)</option>
+                        </select>
+                    </div>
+                    <div class="grid-2">
+                        <button class="btn btn-primary" id="btn-aed-users">
+                            <i class="fas fa-search"></i> Filtrar ($1)
+                        </button>
+                        <button class="btn btn-secondary" id="btn-aed-ranking">
+                            <i class="fas fa-trophy"></i> Top Facturación
+                        </button>
+                    </div>
+                    <button class="btn btn-outline" id="btn-aed-products" style="margin-top: 10px; width:100%">
+                        <i class="fas fa-tags"></i> Informe Precios (Inner Join)
                     </button>
                 </div>
             </section>

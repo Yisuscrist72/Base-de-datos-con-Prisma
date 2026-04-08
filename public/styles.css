@@ -89,6 +89,16 @@ header p {
     gap: 25px;
 }
 
+@media (max-width: 768px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+    .full-width, .native-centered {
+        grid-column: span 1;
+        max-width: 100%;
+    }
+}
+
 .card {
     background: var(--card-bg);
     backdrop-filter: blur(12px);
@@ -105,6 +115,13 @@ header p {
 
 .full-width {
     grid-column: span 2;
+}
+
+.native-centered {
+    grid-column: span 2;
+    justify-self: center;
+    width: 100%;
+    max-width: 485px; /* Ajuste para coincidir con el ancho de las tarjetas de arriba */
 }
 
 .card-header {
@@ -266,9 +283,13 @@ select {
 
 .modal-content {
     background: #1e293b;
-    width: 500px;
+    width: 650px;
+    max-height: 90vh; /* Máximo 90% de la pantalla */
+    display: flex;
+    flex-direction: column;
     border-radius: 20px;
     overflow: hidden;
+    border: 1px solid var(--border);
 }
 
 .modal-content header {
@@ -278,24 +299,88 @@ select {
     align-items: center;
     background: #111827;
     margin: 0;
+    flex-shrink: 0; /* No se encoge */
 }
 
-.modal-content header h3 { margin: 0; }
+.modal-content header h3 { margin: 0; display: flex; align-items: center; gap: 10px; }
 
 .modal-body {
     padding: 30px;
     line-height: 1.6;
     color: var(--text-muted);
+    overflow-y: auto; /* Scroll interno si es necesario */
+    flex-grow: 1;
+}
+
+/* Custom Scrollbar para el Modal */
+.modal-body::-webkit-scrollbar {
+    width: 6px;
+}
+
+.modal-body::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.modal-body::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+.modal-body::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary);
 }
 
 .modal-footer {
     padding: 20px;
     background: #111827;
+    flex-shrink: 0;
 }
 
 .close {
     cursor: pointer;
     font-size: 1.5rem;
+}
+
+/* --- TABLAS AED --- */
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+    border-radius: 10px;
+    background: rgba(0,0,0,0.2);
+    margin-top: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+}
+
+th {
+    background: rgba(255,255,255,0.05);
+    color: var(--text-main);
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+.btn-outline {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+}
+
+.btn-outline:hover {
+    background: rgba(255,255,255,0.05);
+    border-color: var(--secondary);
+    color: var(--secondary);
 }
 
 /* Animations */

@@ -3,11 +3,13 @@ import multer from "multer";
 import path from "path";
 import fs from "fs-extra";
 import { DataExchangeService } from "./services/dataExchange.service.js";
+import { NativeReportService } from "./services/nativeReport.service.js";
 
 const app = express();
 const port = 3000;
 const upload = multer({ dest: "data_temp/uploads/" });
 const exchangeService = new DataExchangeService();
+const nativeService = new NativeReportService();
 
 // Asegurar directorios
 fs.ensureDirSync("data_temp/uploads/");
@@ -54,6 +56,35 @@ app.get("/api/reports", async (req, res) => {
         }));
         res.json(list.reverse());
     } catch (e) { res.json([]); }
+});
+
+// --- AED: RUTAS DE INFORMES NATIVOS (PREPARED STATEMENTS) ---
+
+app.get("/api/native/users/:role", async (req, res) => {
+    try {
+        const users = await nativeService.getUsersByRole(req.params.role);
+        res.json(users);
+    } catch (error: any) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+app.get("/api/native/ranking", async (req, res) => {
+    try {
+        const ranking = await nativeService.getCustomerRanking();
+        res.json(ranking);
+    } catch (error: any) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+app.get("/api/native/products", async (req, res) => {
+    try {
+        const report = await nativeService.getProductPriceReport();
+        res.json(report);
+    } catch (error: any) {
+        res.status(500).json({ error: error.message });
+    }
 });
 
 app.use("/reports", express.static("reports"));
